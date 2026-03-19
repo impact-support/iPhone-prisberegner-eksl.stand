@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 15px; color: #1a1a1a;
+    background: #f0f2f5;
+    min-height: 100vh;
+    padding: 48px 24px;
+  }
+  .container {
+    max-width: 980px; margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 40px 44px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  }
+  h1 {
+    font-size: 20px; font-weight: 600; color: #111;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    letter-spacing: -0.2px;
+  }
+  .section-block {
+    background: #fafafa;
+    border: 1px solid #ebebeb;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .section-label {
+    font-size: 11px; font-weight: 700; color: #888;
+    text-transform: uppercase; letter-spacing: 0.8px;
+    margin-bottom: 14px;
+  }
+  label {
+    font-size: 12px; font-weight: 500; color: #555;
+    display: block; margin-bottom: 6px;
+  }
+  input[type=number], select {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fff;
+    color: #1a1a1a;
+    transition: border-color 0.15s;
+    appearance: auto;
+  }
+  input[type=number]:focus, select:focus {
+    outline: none;
+    border-color: #185FA5;
+    box-shadow: 0 0 0 3px rgba(24,95,165,0.08);
+  }
+  input[type=range] {
+    width: 100%; height: 5px;
+    accent-color: #185FA5;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .row { display: flex; gap: 14px; }
+  .field { flex: 1; }
+  .slider-wrap { margin-top: 4px; }
+  .slider-labels {
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: #bbb; margin-top: 6px;
+  }
+  .alder-val { font-size: 15px; font-weight: 600; color: #185FA5; }
+  .divider { border: none; border-top: 1px solid #f0f0f0; margin: 28px 0; }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { background: #fafafa; }
+  th {
+    font-size: 11px; font-weight: 600; color: #999;
+    text-align: left; padding: 10px 16px;
+    border-bottom: 1px solid #ebebeb;
+    text-transform: uppercase; letter-spacing: 0.4px;
+  }
+  td { padding: 14px 16px; border-bottom: 1px solid #f5f5f5; font-size: 15px; }
+  tbody tr:hover { background: #fafcff; }
+  tr:last-child td { border-bottom: none; }
+  .pris { font-size: 17px; font-weight: 600; color: #111; }
+  .info-box {
+    margin-top: 24px;
+    background: #f8f9fb;
+    border: 1px solid #e8eaed;
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 13px; color: #555; line-height: 1.7;
+  }
+  .info-box div { margin-bottom: 6px; }
+  .info-box div:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Frikøb af arbejdstelefon prisberegner</h1>
+
+  <div class="section-block">
+  <div class="section-label">Medarbejderens telefon</div>
+  <div class="row">
+    <div class="field">
+      <label>Model</label>
+      <select id="nyprismodel" onchange="nyprisModelChanged()" style="font-size:14px;">
+        <optgroup label="iPhone 14 (2022)">
+          <option value="5599">iPhone 14 – 128 GB</option>
+          <option value="6199">iPhone 14 – 256 GB</option>
+          <option value="7399">iPhone 14 – 512 GB</option>
+          <option value="6399">iPhone 14 Plus – 128 GB</option>
+          <option value="6999">iPhone 14 Plus – 256 GB</option>
+          <option value="8199">iPhone 14 Plus – 512 GB</option>
+          <option value="7999">iPhone 14 Pro – 128 GB</option>
+          <option value="8599">iPhone 14 Pro – 256 GB</option>
+          <option value="9799">iPhone 14 Pro – 512 GB</option>
+          <option value="10999">iPhone 14 Pro – 1 TB</option>
+          <option value="8799">iPhone 14 Pro Max – 128 GB</option>
+          <option value="9399">iPhone 14 Pro Max – 256 GB</option>
+          <option value="10599">iPhone 14 Pro Max – 512 GB</option>
+          <option value="11799">iPhone 14 Pro Max – 1 TB</option>
+        </optgroup>
+        <optgroup label="iPhone 15 (2023)">
+          <option value="6239">iPhone 15 – 128 GB</option>
+          <option value="6839">iPhone 15 – 256 GB</option>
+          <option value="8039">iPhone 15 – 512 GB</option>
+          <option value="7039">iPhone 15 Plus – 128 GB</option>
+          <option value="7639">iPhone 15 Plus – 256 GB</option>
+          <option value="8839">iPhone 15 Plus – 512 GB</option>
+          <option value="7999">iPhone 15 Pro – 128 GB</option>
+          <option value="8599">iPhone 15 Pro – 256 GB</option>
+          <option value="9799">iPhone 15 Pro – 512 GB</option>
+          <option value="10999">iPhone 15 Pro – 1 TB</option>
+          <option value="9439">iPhone 15 Pro Max – 256 GB</option>
+          <option value="10639">iPhone 15 Pro Max – 512 GB</option>
+          <option value="11839">iPhone 15 Pro Max – 1 TB</option>
+        </optgroup>
+        <optgroup label="iPhone 16 (2024)">
+          <option value="5999">iPhone 16 – 128 GB</option>
+          <option value="6599">iPhone 16 – 256 GB</option>
+          <option value="7799">iPhone 16 – 512 GB</option>
+          <option value="6799">iPhone 16 Plus – 128 GB</option>
+          <option value="7399">iPhone 16 Plus – 256 GB</option>
+          <option value="8599">iPhone 16 Plus – 512 GB</option>
+          <option value="7599">iPhone 16 Pro – 128 GB</option>
+          <option value="8399">iPhone 16 Pro – 256 GB</option>
+          <option value="9999">iPhone 16 Pro – 512 GB</option>
+          <option value="11599">iPhone 16 Pro – 1 TB</option>
+          <option value="9199">iPhone 16 Pro Max – 256 GB</option>
+          <option value="10799">iPhone 16 Pro Max – 512 GB</option>
+          <option value="12399">iPhone 16 Pro Max – 1 TB</option>
+          <option value="4399">iPhone 16e – 128 GB</option>
+          <option value="5199">iPhone 16e – 256 GB</option>
+          <option value="6399">iPhone 16e – 512 GB</option>
+        </optgroup>
+        <optgroup label="iPhone 17 (2025)">
+          <option value="5999">iPhone 17 – 256 GB</option>
+          <option value="6799">iPhone 17 – 512 GB</option>
+          <option value="7999">iPhone 17 Pro – 256 GB</option>
+          <option value="9199">iPhone 17 Pro – 512 GB</option>
+          <option value="10399">iPhone 17 Pro – 1 TB</option>
+          <option value="9599">iPhone 17 Pro Max – 256 GB</option>
+          <option value="10799">iPhone 17 Pro Max – 512 GB</option>
+          <option value="11999">iPhone 17 Pro Max – 1 TB</option>
+          <option value="4399">iPhone 17e – 256 GB</option>
+          <option value="5199">iPhone 17e – 512 GB</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="field">
+      <label>Nypris ex moms (kr.)</label>
+      <input type="number" id="nypris" value="5599" min="0" step="100" oninput="update()">
+    </div>
+  </div>
+  </div>
+
+  <div class="section-block">
+  <div class="section-label">Standardmodel</div>
+  <div class="row">
+    <div class="field">
+      <label>Model</label>
+      <select id="stdmodel" onchange="modelChanged()">
+        <optgroup label="iPhone 14 (2022)">
+          <option value="5599">iPhone 14 – 128 GB</option>
+        </optgroup>
+        <optgroup label="iPhone 15 (2023)">
+          <option value="6239">iPhone 15 – 128 GB</option>
+        </optgroup>
+        <optgroup label="iPhone 16e (2025)">
+          <option value="4399">iPhone 16e – 128 GB</option>
+        </optgroup>
+        <optgroup label="iPhone 17e (2026)">
+          <option value="4399">iPhone 17e – 256 GB</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="field">
+      <label>Standardmodel nypris ex moms (kr.)</label>
+      <input type="number" id="stdpris" value="5599" min="0" step="100" oninput="update()">
+    </div>
+    <div class="field">
+      <label>Årlig afskrivning (%)</label>
+      <input type="number" id="afskrivning" value="25" min="1" max="60" step="1" oninput="update()">
+    </div>
+  </div>
+  <div class="slider-wrap" style="margin-top:18px;">
+    <label>Alder: <span class="alder-val" id="alder-lbl">36 måneder</span></label>
+    <input type="range" min="0" max="72" value="36" step="1" id="alder" oninput="update()">
+    <div class="slider-labels">
+      <span>0 mdr.</span><span>12</span><span>24</span><span>36</span><span>48</span><span>60</span><span>72 mdr.</span>
+    </div>
+  </div>
+  </div>
+
+  <hr class="divider">
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:20%">Afskrivningsfaktor</th>
+        <th style="width:35%">Medarbejderpris</th>
+        <th style="width:45%">Egenbetaling</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+
+  <div class="info-box">
+    <div><strong style="color:#333;">Egenbetaling</strong> — Differencen mellem medarbejderens telefons nedskrevne værdi og standardmodellens nedskrevne værdi. Priser er ex 25% moms ved lancering (ca.)</div>
+    <div><strong style="color:#333;">Afskrivningsfaktor på 70%</strong> — som antagelse for en rimelig afskrivning ift. ny stand.</div>
+    <div><strong style="color:#333;">Årlig afskrivning %</strong> — Hvor meget telefonens værdi falder pr. år.</div>
+  </div>
+</div>
+
+<script>
+var stands = [
+  { factor: 0.7 }
+];
+
+function applyYearToSelected(select) {
+  var opts = select.options;
+  for (var i = 0; i < opts.length; i++) {
+    if (opts[i].dataset.orig) opts[i].text = opts[i].dataset.orig;
+  }
+  var opt = opts[select.selectedIndex];
+  if (!opt.dataset.orig) opt.dataset.orig = opt.text;
+  var grpLabel = opt.parentElement.label || '';
+  var yearMatch = grpLabel.match(/\d{4}/);
+  if (yearMatch) opt.text = opt.dataset.orig + ' (' + yearMatch[0] + ')';
+}
+
+function restoreAllOptions(select) {
+  var opts = select.options;
+  for (var i = 0; i < opts.length; i++) {
+    if (opts[i].dataset.orig) opts[i].text = opts[i].dataset.orig;
+  }
+}
+
+function nyprisModelChanged() {
+  var select = document.getElementById('nyprismodel');
+  document.getElementById('nypris').value = select.value;
+  applyYearToSelected(select);
+  update();
+}
+
+function modelChanged() {
+  var select = document.getElementById('stdmodel');
+  document.getElementById('stdpris').value = select.value;
+  applyYearToSelected(select);
+  update();
+}
+
+function update() {
+  var nypris = parseFloat(document.getElementById('nypris').value) || 0;
+  var stdpris = parseFloat(document.getElementById('stdpris').value) || 0;
+  var alder = parseInt(document.getElementById('alder').value);
+  var afsk = parseFloat(document.getElementById('afskrivning').value) / 100;
+  document.getElementById('alder-lbl').textContent = alder + ' måneder';
+  var depFactor = Math.pow(1 - afsk, alder / 12);
+  var baseStd = stdpris * depFactor;
+  var html = '';
+  stands.forEach(function(s) {
+    var pris = Math.round(nypris * depFactor * s.factor);
+    var stdPris = Math.round(baseStd * s.factor);
+    var egenbetaling = pris - stdPris;
+    var egenStr = egenbetaling > 0
+      ? '<span style="color:#8b1a1a; font-weight:500;">+' + egenbetaling.toLocaleString('da-DK') + ' kr.</span>'
+      : egenbetaling < 0
+        ? '<span style="color:#0a5c44; font-weight:500;">' + egenbetaling.toLocaleString('da-DK') + ' kr.</span>'
+        : '<span style="color:#aaa;">0 kr.</span>';
+    html += '<tr>'
+      + '<td style="color:#888;">' + Math.round(s.factor * 100) + '%</td>'
+      + '<td class="pris">' + pris.toLocaleString('da-DK') + ' kr.</td>'
+      + '<td>' + egenStr + '</td>'
+      + '</tr>';
+  });
+  document.getElementById('tbody').innerHTML = html;
+}
+
+var nyprisSel = document.getElementById('nyprismodel');
+nyprisSel.addEventListener('focus', function() { restoreAllOptions(this); });
+nyprisSel.addEventListener('blur', function() { applyYearToSelected(this); });
+applyYearToSelected(nyprisSel);
+var stdSel = document.getElementById('stdmodel');
+stdSel.addEventListener('focus', function() { restoreAllOptions(this); });
+stdSel.addEventListener('blur', function() { applyYearToSelected(this); });
+applyYearToSelected(stdSel);
+update();
+</script>
+</body>
+</html>
